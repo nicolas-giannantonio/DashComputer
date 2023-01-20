@@ -3,7 +3,7 @@
 
 This software allows you to do different hardware/software analyses, you will find different tools:
 
-- Live analysis of your CPU (still in development)
+- Live analysis of your CPU (*still in development*)
 
 - Analysis of the wifi networks around you and measure the quality of the networks, how far you are from these networks...
 
@@ -13,8 +13,12 @@ This software allows you to do different hardware/software analyses, you will fi
 
 - A table with all the versions of the main software on your computer.
 
+Being a beta phase of the software, to launch it you must enter the command :
+**npm start**
+
 
 The software is developed for macOS, but also compatible for window/linux.
 (It is still in the development phase, many changes are coming 🔜)
 
-### This project is open source, anyone wishing to contribute to the project is invited.
+### *This project is open source, anyone wishing to contribute to the project is invited.*
+
