@@ -22,5 +22,12 @@ The software is developed for macOS, but also compatible for window/linux with l
 
 ### *This project is open source, anyone wishing to contribute to the project is invited.*
 
-** Information Système :**
+## Network
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/213694119-03ec8916-e8da-4d5a-875f-3d628e483bc5.png">
+
+
+## Information Système
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/213693864-5369b882-a31b-4408-8769-4450fadd235d.png">
+
+## Versions
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/213694055-001cbfdf-db94-4108-9f31-a82d960e17c1.png">
