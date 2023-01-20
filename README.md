@@ -3,7 +3,7 @@
 
 This software allows you to do different hardware/software analyses, you will find different tools:
 
-- Live analysis of your CPU
+- Live analysis of your CPU (still in development)
 
 - Analysis of the wifi networks around you and measure the quality of the networks, how far you are from these networks...
 
@@ -16,4 +16,4 @@ This software allows you to do different hardware/software analyses, you will fi
 
 the software is developed for macOS, but also compatible for window/linux.
 
-It is still in the development phase, many changes are coming ->
+It is still in the development phase, many changes are coming 🔜
