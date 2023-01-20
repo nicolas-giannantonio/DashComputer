@@ -14,7 +14,7 @@ This software allows you to do different hardware/software analyses, you will fi
 - A table with all the versions of the main software on your computer.
 
 Being a beta phase of the software, to launch it you must enter the command :
-<u>**npm start**</u>
+**npm start**
 
 
 The software is developed for macOS, but also compatible for window/linux.
