@@ -1,5 +1,7 @@
 
-# Hello everyone
+# DashComputer
+
+### Hello everyone, 
 
 This software allows you to do different hardware/software analyses, you will find different tools:
 
