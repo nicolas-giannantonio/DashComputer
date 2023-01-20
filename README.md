@@ -17,4 +17,4 @@ This software allows you to do different hardware/software analyses, you will fi
 The software is developed for macOS, but also compatible for window/linux.
 (It is still in the development phase, many changes are coming 🔜)
 
-## This project is open source, anyone wishing to contribute to the project is invited.
+### This project is open source, anyone wishing to contribute to the project is invited.
