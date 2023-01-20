@@ -25,6 +25,8 @@ The software is developed for macOS, but also compatible for window/linux with l
 ## Network
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/213694119-03ec8916-e8da-4d5a-875f-3d628e483bc5.png">
 
+## Wifi
+![wifi](https://user-images.githubusercontent.com/75692173/213695431-0ff4f2b7-4420-4cbe-af28-1898cb17bd37.png)
 
 ## Information Système
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/213693864-5369b882-a31b-4408-8769-4450fadd235d.png">
