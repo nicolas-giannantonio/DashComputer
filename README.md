@@ -1,9 +1,7 @@
-# Dashboard
 
+# Hello everyone
 
-In this software, you will be able to find in the form of a dashboard, the most important information of your computer (cpu, battery, memory).
-
-You will find different tools:
+This software allows you to do different hardware/software analyses, you will find different tools:
 
 - Live analysis of your CPU
 
