@@ -22,3 +22,5 @@ The software is developed for macOS, but also compatible for window/linux with l
 
 ### *This project is open source, anyone wishing to contribute to the project is invited.*
 
+** Information Système :**
+<img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/213693864-5369b882-a31b-4408-8769-4450fadd235d.png">
