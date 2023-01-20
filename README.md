@@ -17,7 +17,7 @@ Being a beta phase of the software, to launch it you must enter the command :
 **npm start**
 
 
-The software is developed for macOS, but also compatible for window/linux.
+The software is developed for macOS, but also compatible for window/linux with less features.
 (It is still in the development phase, many changes are coming 🔜)
 
 ### *This project is open source, anyone wishing to contribute to the project is invited.*
