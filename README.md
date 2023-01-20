@@ -11,4 +11,9 @@ This software allows you to do different hardware/software analyses, you will fi
 
 - A table with the versions of all the languages that are on your computer.
 
-- A table with all the versions of the main software on your computer
+- A table with all the versions of the main software on your computer.
+
+
+the software is developed for macOS, but also compatible for window/linux.
+
+It is still in the development phase, many changes are coming ->
