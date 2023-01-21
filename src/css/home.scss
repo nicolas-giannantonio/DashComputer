@@ -3,15 +3,53 @@
         margin: 5vh;
         display: flex;
         align-items: baseline;
-        justify-content: space-between;
         flex-wrap: wrap;
         gap: 50px;
 
-        .container-presentation {
+        .once-container {
             box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: auto;
+            min-width: 500px;
             padding: 15px;
             border-radius: 15px;
+            &:nth-child(1) {
+                background-color: #d4ddfa;
+                .title-container-presentation {
+                    color: #4e7dff;
+                    text-transform: capitalize;
+                }
+            }
+            &:nth-child(2) {
+                background-color: #fcefe2;
+                .title-container-presentation {
+                    color: #ec8735;
+                    text-transform: capitalize;
+                }
+            }
+            &:nth-child(3) {
+                background-color: #fcefe2;
+                .title-container-presentation {
+                    color: #ec8735;
+                    text-transform: capitalize;
+                }
+            }
+            &:nth-child(4) {
+                background-color: #cdcbff;
+                .title-container-presentation {
+                    color: #4643ff;
+                    text-transform: capitalize;
+                }
+            }
+            &:nth-child(5) {
+                background-color: #f3b2d1;
+                .title-container-presentation {
+                    color: #c2085c;
+                    text-transform: capitalize;
+                }
+            }
+        }
+
+        .container-presentation {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -20,5 +58,49 @@
                 margin-top: 5px;
             }
         }
+
+        .title-container-presentation {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3a3a3a;
+        }
+
+        .container-description-home {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            width: auto;
+
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .network-description-home {
+            margin: 0 auto;
+        }
+        .info-description-home {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            background-color: white;
+            margin-top: 10px;
+            width: fit-content;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px 0 rgb(228, 228, 228);
+            display: flex;
+            align-items: left;
+            flex-direction: column;
+        }
+    }
+
+    .languages {
+        min-width: 300px !important;
+        width: 350px !important;
+    }
+
+    .infoDescription {
+        font-size: 0.7rem;
+        color: #3a3a3a;
+        font-weight: 500;
     }
 }

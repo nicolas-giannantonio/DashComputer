@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Network() {
+function Network({ attributes }) {
   const [network, setNetwork] = useState([]);
   const [gateway, setGateway] = useState("");
   const [ports, setPorts] = useState([]);
@@ -27,7 +27,6 @@ function Network() {
       });
   }, [network]) */
 
-  
   return (
     <>
       <div className="containers">
@@ -43,6 +42,7 @@ function Network() {
             ? "Chargement du nombre de ports"
             : network.length + " ports trouvés"}
         </p>
+
         <div className="container network">
           <table className="table-network">
             <thead>
