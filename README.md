@@ -23,14 +23,11 @@ The software is developed for macOS, but also compatible for window/linux with l
 
 ### *This project is open source, anyone wishing to contribute to the project is invited.*
 
-<<<<<<< HEAD
-=======
 ### Installation 
 - download the folder 
 - npm install
 - npm start
 
->>>>>>> cdf5664a40e90e626a5ef97bdbc2b41e98faf07e
 ## Network
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/213694119-03ec8916-e8da-4d5a-875f-3d628e483bc5.png">
 
