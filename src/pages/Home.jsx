@@ -24,6 +24,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
+    if(app == "error") return
     app.forEach((apps) => {
       setNameApp((soft) => [
         ...soft,
@@ -43,10 +44,27 @@ function Home() {
 
   /* Network */
   const [gateway, setGateway] = useState("");
+  const [network, setNetwork] = useState([]);
+  const [localDevPort, setLocalDevPort] = useState(0)
+
   useEffect(() => {
     let res = api.req_gateway();
     res.then((r) => setGateway(r)).catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLocalDevPort(0)
+      let res = api.req_network();
+      res.then((r) => setNetwork(r)).catch((e) => console.log(e));
+      network.forEach((net) => {
+        if (net.localAddress == "127.0.0.1") {
+          // ADD 1 TO LOCAL DEV PORT
+          setLocalDevPort(number => number + 1)
+        }
+      });
+    }, 3000);
+  }, [network]);
 
   /* WIFI */
   const [wifi, setWifi] = useState([]);
@@ -72,7 +90,14 @@ function Home() {
     return distance;
   };
 
-  console.log(wifi);
+  /* BATTERIE */
+
+  const [batterie, setBatterie] = useState("");
+
+  useEffect(() => {
+    let res = api.req_batterie();
+    res.then((r) => setBatterie(r)).catch((e) => console.log(e));
+  }, []);
 
   return (
     <div className="Home">
@@ -113,6 +138,19 @@ function Home() {
               <span>{IS.physicalCores}</span>
               <span className="infoDescription">coeurs physique</span>
             </p>
+
+            <p className="info-description-home">
+              <span>{batterie.percent}%</span>
+              <span className="infoDescription">Pourcentage</span>
+            </p>
+            <p className="info-description-home">
+              <span>{batterie.cycleCount}</span>
+              <span className="infoDescription">Cycles</span>
+            </p>
+            <p className="info-description-home">
+              <span>{batterie.timeRemaining}min</span>
+              <span className="infoDescription">Temps restant</span>
+            </p>
           </div>
         </div>
 
@@ -138,9 +176,22 @@ function Home() {
             </NavLink>
           </div>
           <div className="container-description-home">
-            <p className="info-description-home">node {softVersions.node}</p>
-            <p className="info-description-home">pip3 {softVersions.pip3}</p>
-            <p className="info-description-home">npm {softVersions.npm}</p>
+            <p className="info-description-home">
+              <span>{softVersions.node}</span>
+              <span className="infoDescription">node</span>
+            </p>
+            <p className="info-description-home">
+              <span>{softVersions.pip3}</span>
+              <span className="infoDescription">pip3</span>
+            </p>
+            <p className="info-description-home">
+              <span>{softVersions.npm}</span>
+              <span className="infoDescription">npm</span>
+            </p>
+            <p className="info-description-home">
+              <span>{softVersions.python3}</span>
+              <span className="infoDescription">python3</span>
+            </p>
           </div>
         </div>
 
@@ -167,13 +218,20 @@ function Home() {
           </div>
           <div className="container-description-home">
             <p className="info-description-home">
-              {nameApp[0]} - {versionApp[0]}
+              <span>{versionApp[0]}</span>
+              <span className="infoDescription">{nameApp[0]}</span>
             </p>
             <p className="info-description-home">
-              {nameApp[10]} - {versionApp[10]}
+              <span>{versionApp[1]}</span>
+              <span className="infoDescription">{nameApp[1]}</span>
             </p>
             <p className="info-description-home">
-              {nameApp[4]} - {versionApp[4]}
+              <span>{versionApp[2]}</span>
+              <span className="infoDescription">{nameApp[2]}</span>
+            </p>
+            <p className="info-description-home">
+              <span>{versionApp[3]}</span>
+              <span className="infoDescription">{nameApp[3]}</span>
             </p>
           </div>
         </div>
@@ -181,7 +239,7 @@ function Home() {
         <div className="once-container">
           <div className="container-presentation">
             <p className="title-container-presentation">Network</p>
-            <NavLink to="soft-versions">
+            <NavLink to="network">
               <svg
                 width="24"
                 height="24"
@@ -205,12 +263,12 @@ function Home() {
               <span className="infoDescription">Gateway IP</span>
             </p>
             <p className="info-description-home">
-              <span>{102}</span>
+              <span>{network.length !== 0 ? network.length : "..."}</span>
               <span className="infoDescription">Ports ouverts</span>
             </p>
             <p className="info-description-home">
-              <span>{4}</span>
-              <span className="infoDescription">Figma's port</span>
+              <span>{localDevPort !== 0 ? localDevPort : "..."}</span>
+              <span className="infoDescription">127.0.0.1's ports</span>
             </p>
           </div>
         </div>
@@ -218,7 +276,7 @@ function Home() {
         <div className="once-container">
           <div className="container-presentation">
             <p className="title-container-presentation">Wifi</p>
-            <NavLink to="soft-versions">
+            <NavLink to="wifi">
               <svg
                 width="24"
                 height="24"
@@ -247,8 +305,12 @@ function Home() {
             </p>
             <p className="info-description-home">
               <span>
-              {wifi.length !== 0
-                  ? "≈" + distance(wifi[0].frequency, wifi[0].signalLevel).toFixed(2) + "m"
+                {wifi.length !== 0
+                  ? "≈" +
+                    distance(wifi[0].frequency, wifi[0].signalLevel).toFixed(
+                      2
+                    ) +
+                    "m"
                   : "..."}
               </span>
               <span className="infoDescription">Distance</span>

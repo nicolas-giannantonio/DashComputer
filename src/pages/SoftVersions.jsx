@@ -43,6 +43,7 @@ function SoftVersions() {
   }, []);
 
   useEffect(() => {
+    if (app == "error") return;
     app.forEach((apps) => {
       setNameApp((soft) => [
         ...soft,

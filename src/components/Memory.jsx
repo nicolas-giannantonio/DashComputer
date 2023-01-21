@@ -12,7 +12,14 @@ function Memory() {
   /* !!!!! NON PAS CHANGÉÉ mais c'est OPENFILE */
   useEffect(() => {
     let res = api.req_fsSize();
-    res.then((r) => setSize(r[0])).catch((e) => console.log(e));
+    res
+      .then((r) => {
+        if(r !== "notSupported"){
+        setSize(r[0]);}else{
+          setSize({Capacity: "Not supported", Avail: "Not supported"})
+        }
+      })
+      .catch((e) => console.log(e));
   }, []);
   console.log(size);
   /*   console.log("data memory : ", memory.device);
@@ -40,7 +47,9 @@ function Memory() {
       </p>
 
       <p className="under-up">
-        <span className="important-data">{String((size.Avail)).slice(0, -2)}Go</span>
+        <span className="important-data">
+          {String(size.Avail).slice(0, -2)}Go
+        </span>
         <span className="subtitle-data">(libre)</span>
       </p>
 

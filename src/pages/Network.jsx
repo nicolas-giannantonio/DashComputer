@@ -3,9 +3,7 @@ import React, { useEffect, useState } from "react";
 function Network({ attributes }) {
   const [network, setNetwork] = useState([]);
   const [gateway, setGateway] = useState("");
-  const [ports, setPorts] = useState([]);
-  const [localAddress, setLocalAddress] = useState([]);
-
+  
   useEffect(() => {
     setTimeout(() => {
       let res = api.req_network();

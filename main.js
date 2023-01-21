@@ -69,30 +69,39 @@ ipcMain.handle("req_memory", () => {
   });
 });
 
-ipcMain.handle("req_fsSize", () => {
+if (process.platform == "darwin") {
+  ipcMain.handle("req_fsSize", () => {
     return new Promise((resolve, reject) => {
-        exec("df -h /", (error, stdout, stderr) => {
-            if (error) {
-                console.log(`error: ${error.message}`);
-                reject(error);
-            }
-            if (stderr) {
-                console.log(`stderr: ${stderr}`);
-                return;
-            }
-            const lines = stdout.split('\n');
-            const headers = lines[0].split(/\s+/);
-            const data = lines.slice(1, -1).map(line => {
-                const values = line.split(/\s+/);
-                return headers.reduce((obj, header, index) => {
-                    obj[header] = values[index];
-                    return obj;
-                }, {});
-            });
-            resolve(data);
+      exec("df -h /", (error, stdout, stderr) => {
+        if (error) {
+          console.log(`error: ${error.message}`);
+          reject(error);
+        }
+        if (stderr) {
+          console.log(`stderr: ${stderr}`);
+          return;
+        }
+        const lines = stdout.split("\n");
+        const headers = lines[0].split(/\s+/);
+        const data = lines.slice(1, -1).map((line) => {
+          const values = line.split(/\s+/);
+          return headers.reduce((obj, header, index) => {
+            obj[header] = values[index];
+            return obj;
+          }, {});
         });
+        resolve(data);
+      });
     });
-});
+  });
+} else {
+  ipcMain.handle("req_fsSize", () => {
+    return new Promise((resolve, reject) => {
+      resolve("notSupported");
+      reject("error");
+    });
+  });
+}
 
 ipcMain.handle("req_monitor", () => {
   return new Promise((resolve, reject) => {
@@ -160,31 +169,33 @@ ipcMain.handle("req_versions", () => {
 
 let logiciels = new Array();
 // Rechercher tous les fichiers .app dans le répertoire Applications
-exec(
-  'find /Applications -maxdepth 1 -name  "*.app"',
-  (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
-    }
-    // Pour chaque fichier .app trouvé, lire les informations de version
-    const apps = stdout.split("\n");
-    apps.forEach((app) => {
-      if (app && error == null) {
-        exec(
-          `defaults read "${app}/Contents/Info" CFBundleShortVersionString`,
-          (error, stdout, stderr) => {
-            if (error) {
-              console.error(`exec error: ${error}`);
-              logiciels.push({ app, version: "N/A" });
-              return;
+// Seulement si l'utilisateur et sur macOS
+if (process.platform == "darwin") {
+  exec(
+    'find /Applications -maxdepth 1 -name  "*.app"',
+    (error, stdout, stderr) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
+      // Pour chaque fichier .app trouvé, lire les informations de version
+      const apps = stdout.split("\n");
+      apps.forEach((app) => {
+        if (app && error == null) {
+          exec(
+            `defaults read "${app}/Contents/Info" CFBundleShortVersionString`,
+            (error, stdout, stderr) => {
+              if (error) {
+                console.error(`exec error: ${error}`);
+                logiciels.push({ app, version: "N/A" });
+                return;
+              }
+
+              logiciels.push({ app, version: stdout });
             }
+          );
 
-            logiciels.push({ app, version: stdout });
-          }
-        );
-
-        /*  exec(`du -sh "${app}"`, (error, stdout, stderr) => {
+          /*  exec(`du -sh "${app}"`, (error, stdout, stderr) => {
           if (error || stdout == undefined || stdout == NaN) {
             console.error(`exec error: ${error}`);
             logiciels.push({ app, size: "N/A" });
@@ -193,16 +204,24 @@ exec(
 
           logiciels.push({ app, size: stdout });
         }); */
-      }
-    });
-    ipcMain.handle("req_app", () => {
-      return new Promise((resolve, reject) => {
-        resolve(logiciels);
-        reject("error");
+        }
       });
+      ipcMain.handle("req_app", () => {
+        return new Promise((resolve, reject) => {
+          resolve(logiciels);
+          reject("error");
+        });
+      });
+    }
+  );
+} else {
+  ipcMain.handle("req_app", () => {
+    return new Promise((resolve, reject) => {
+      resolve("error");
+      reject("error");
     });
-  }
-);
+  });
+}
 
 ipcMain.handle("req_network", () => {
   return new Promise((resolve, reject) => {
