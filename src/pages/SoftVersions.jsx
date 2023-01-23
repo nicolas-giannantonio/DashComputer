@@ -4,14 +4,7 @@ function SoftVersions() {
   const [docs, setDocs] = useState([]);
   const [versions, setVersions] = useState({});
 
-  const [nameSoft, setNameSoft] = useState([]);
-  const [numberSoft, setNumberSoft] = useState([]);
-
   const [app, setApp] = useState([]);
-  const [nameApp, setNameApp] = useState([]);
-  const [versionApp, setVersionApp] = useState([]);
-
-  const [size, setSize] = useState([]);
 
   useEffect(() => {
     let res = api.req_Files();
@@ -24,88 +17,81 @@ function SoftVersions() {
   }, []);
 
   // Afficher les versions des logiciels
+  const [allLanguages, SetAllLanguages] = useState([]);
   useEffect(() => {
     for (let i in versions) {
       if (versions[i] !== "") {
-        setNameSoft((soft) => [...soft, i]);
-        setNumberSoft((soft) => [...soft, versions[i]]);
+        SetAllLanguages((soft) => [...soft, { nom: i, version: versions[i] }]);
       }
     }
   }, [versions]);
 
-  /* useEffect(() => {
-    api.send("3000", "php")
-  }, []) */
+  allLanguages.map((soft, key) => console.log(soft.name, soft.version, key));
 
   useEffect(() => {
     let res = api.req_app();
     res.then((r) => setApp(r)).catch((e) => console.log(e));
   }, []);
 
+  const [ensemble, setEnsemble] = useState([]);
   useEffect(() => {
     if (app == "error") return;
     app.forEach((apps) => {
-      setNameApp((soft) => [
-        ...soft,
-        String(apps.app).replace("/Applications/", ""),
-      ]);
-      setVersionApp((soft) => [...soft, apps.version]);
+      setEnsemble((soft) => [...soft, apps]);
     });
   }, [app]);
 
   return (
     <div className="SoftVersions">
-      <div className="container soft">
-        <p className="title-container">languages Versions</p>
-        {/* <input type="text" placeholder="Search software" />
-      {docs.map((doc, key) => (
-        <ul>
-          <li id={key}>{doc}</li>
-        </ul>
-      ))} */}
-        <div className="container-soft">
-          <div className="container-softname">
-            <ul>
-              {nameSoft.map((soft, key) => (
-                <li key={key}>{soft}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="container-softversions">
-            <ul>
-              {numberSoft.map((soft, key) => (
-                <li key={key}>{soft}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div className="container soft logiciels">
-        <p className="title-container">logiciels Versions</p>
-        <div className="container-soft">
-          <div className="container-softname">
-            <ul>
-              {nameApp.map((soft, key) => (
-                <li key={key}>{soft}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="container-softversions">
-            <ul>
-              {versionApp.map((soft, key) => (
-                <li key={key}>{soft}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="container-softversions">
-            <ul>
-              {size.map((soft, key) => (
-                <li key={key}>{soft}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
+      <table className="table-network">
+        <thead>
+          <tr>
+            <th>Langages</th>
+            <th>Version</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allLanguages.length !== 0 ? (
+            allLanguages.map((soft, key) => (
+              <tr key={key}>
+                <td>{soft.nom}</td>
+
+                <td>{soft.version}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>chargement...</td>
+              <td>chargement...</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      <table className="table-network">
+        <thead>
+          <tr>
+            <th>Application</th>
+            <th>Version </th>
+          </tr>
+        </thead>
+        <tbody>
+          {ensemble.length !== 0 ? (
+            ensemble.map((soft, key) => (
+              <tr key={key}>
+                <td>{soft.app.replace("/Applications/", "")}</td>
+
+                <td>{soft.version}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>chargement...</td>
+              <td>chargement...</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }

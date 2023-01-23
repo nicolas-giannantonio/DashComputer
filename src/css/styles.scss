@@ -352,3 +352,23 @@
         }
     }
 }
+
+
+.SoftVersions {
+    
+    .table-network {
+        width: 40%;
+        height: 500px;
+        overflow-y: scroll;
+        thead {
+            background: #ffe0b3;
+            color: #ea3323;
+        }
+
+        tbody {
+            tr:nth-child(even) {
+                background: #fff5e6;
+            }
+        }
+    }
+}

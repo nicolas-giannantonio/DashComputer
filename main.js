@@ -36,6 +36,7 @@ ipcMain.handle("req_batterie", () => {
   });
 });
 
+
 ipcMain.handle("req_cpu", () => {
   return new Promise((resolve, reject) => {
     resolve(
