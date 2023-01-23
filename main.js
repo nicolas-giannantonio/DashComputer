@@ -6,6 +6,8 @@ const connection = require("tedious").Connection;
 const Request = require("tedious").Request;
 const { exec } = require("child_process");
 
+const FastSpeedtest = require("fast-speedtest-api");
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 1080,
@@ -35,7 +37,6 @@ ipcMain.handle("req_batterie", () => {
     reject("error");
   });
 });
-
 
 ipcMain.handle("req_cpu", () => {
   return new Promise((resolve, reject) => {
@@ -146,17 +147,6 @@ ipcMain.handle("req_Files", () => {
   return fs.readdirSync("/Applications");
 });
 
-/* ipcMain.on("3000", (event, arg) => {
-    console.log("evnet, arg : ",event, arg);
-    const notification = {
-        title: arg,
-        body: "Notification from the Main process"
-    }
-    new Notification(notification).show();
-    params = arg;
-
-}); */
-
 ipcMain.handle("req_versions", () => {
   return new Promise((resolve, reject) => {
     resolve(
@@ -256,6 +246,54 @@ ipcMain.handle("req_wifi", () => {
     reject("error");
   });
 });
+
+/* PARAMS */
+let token = "";
+ipcMain.on("3000", (event, arg) => {
+  console.log("evnet, arg : ", event, arg);
+  const notification = {
+    title: arg,
+    body: "Votre token à bien été enregistré !",
+  };
+  token = arg;
+  new Notification(notification).show();
+
+  if (token.length > 0) {
+    let speedtest = new FastSpeedtest({
+      token: token, // required
+      verbose: false, // default: false
+      timeout: 5000, // default: 5000
+      https: true, // default: true
+      urlCount: 5, // default: 5
+      bufferSize: 8, // default: 8
+      unit: FastSpeedtest.UNITS.Mbps, // default: Bps
+    });
+
+    ipcMain.handle("req_speedTest", () => {
+      return new Promise((resolve, reject) => {
+        speedtest
+          .getSpeed()
+          .then((s) => {
+            console.log(`Speed: ${s} Mbps`);
+            resolve(s);
+          })
+          .catch((e) => {
+            reject(e.message);
+          });
+      });
+    });
+  } else {
+    ipcMain.handle("req_speedTest", () => {
+      return new Promise((resolve, reject) => {
+        resolve(0);
+        reject("error");
+      });
+    });
+  }
+});
+
+/* let token = "YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm";
+ */
 
 app.whenReady().then(() => {
   createWindow();

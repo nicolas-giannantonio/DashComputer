@@ -46,7 +46,7 @@ function SoftVersions() {
       <table className="table-network">
         <thead>
           <tr>
-            <th>Langages</th>
+            <th>Langage</th>
             <th>Version</th>
           </tr>
         </thead>
@@ -72,7 +72,7 @@ function SoftVersions() {
         <thead>
           <tr>
             <th>Application</th>
-            <th>Version </th>
+            <th>Version</th>
           </tr>
         </thead>
         <tbody>

@@ -151,6 +151,7 @@
                 border-bottom: 2px solid #c2085c;
             }
         }
+       
     }
 
     .humberger {
@@ -358,11 +359,11 @@
     
     .table-network {
         width: 40%;
-        height: 500px;
-        overflow-y: scroll;
+        max-height: 500px;
+        overflow-y: auto;
         thead {
             background: #ffe0b3;
-            color: #ea3323;
+            color: #ab6700;
         }
 
         tbody {
@@ -370,5 +371,44 @@
                 background: #fff5e6;
             }
         }
+    }
+}
+
+/* PARAMS  */
+
+.devby {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+.form-token-params {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 5vh;
+    gap: 20px;
+    input {
+        width: 300px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        box-shadow: 0 4px 30px rgb(0 0 0 / 10%);;
+        font-weight: 500;
+        &::placeholder {
+            text-transform: lowercase;
+            font-style: italic;
+            
+        }
+    }
+
+    .tokenbtn {
+        background-color: #ffffff;
+        border-radius: 5px;
+        width: 300px;
+        cursor: pointer;
     }
 }

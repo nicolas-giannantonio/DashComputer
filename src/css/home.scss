@@ -48,6 +48,14 @@
                     text-transform: capitalize;
                 }
             }
+            &:nth-child(6) {
+                background-color: #ff9c98;
+                min-width: 200px;
+                .title-container-presentation {
+                    color: #e63832;
+                    text-transform: capitalize;
+                }
+            }
         }
 
         .container-presentation {

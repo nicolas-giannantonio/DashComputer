@@ -24,7 +24,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if(app == "error") return
+    if (app == "error") return;
     app.forEach((apps) => {
       setNameApp((soft) => [
         ...soft,
@@ -45,7 +45,7 @@ function Home() {
   /* Network */
   const [gateway, setGateway] = useState("");
   const [network, setNetwork] = useState([]);
-  const [localDevPort, setLocalDevPort] = useState(0)
+  const [localDevPort, setLocalDevPort] = useState(0);
 
   useEffect(() => {
     let res = api.req_gateway();
@@ -54,13 +54,13 @@ function Home() {
 
   useEffect(() => {
     setTimeout(() => {
-      setLocalDevPort(0)
+      setLocalDevPort(0);
       let res = api.req_network();
       res.then((r) => setNetwork(r)).catch((e) => console.log(e));
       network.forEach((net) => {
         if (net.localAddress == "127.0.0.1") {
           // ADD 1 TO LOCAL DEV PORT
-          setLocalDevPort(number => number + 1)
+          setLocalDevPort((number) => number + 1);
         }
       });
     }, 3000);
@@ -98,6 +98,15 @@ function Home() {
     let res = api.req_batterie();
     res.then((r) => setBatterie(r)).catch((e) => console.log(e));
   }, []);
+
+  /* SpeedTest */
+  const [speedTest, setSpeedTest] = useState(0);
+
+  useEffect(() => {
+    let res = api.req_speedTest();
+    res.then((r) => setSpeedTest(r)).catch((e) => console.log(e));
+  }, [speedTest]);
+  console.log(speedTest);
 
   return (
     <div className="Home">
@@ -314,6 +323,39 @@ function Home() {
                   : "..."}
               </span>
               <span className="infoDescription">Distance</span>
+            </p>
+          </div>
+        </div>
+
+        <div className="once-container">
+          <div className="container-presentation">
+            <p className="title-container-presentation">Speed Test</p>
+            <NavLink to="monitoring">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 11L21.2 2.8M22 6.8V2H17.2M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13"
+                  stroke="black"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </NavLink>
+          </div>
+          <div className="container-description-home speedTest">
+            <p className="info-description-home">
+              <span>{speedTest !== 0 ? speedTest.toFixed(2) : "..."}</span>
+              <span className="infoDescription">Mb/s</span>
+            </p>
+            <p className="info-description-home">
+              <span>{speedTest !== 0 ? (speedTest / 8).toFixed(2) : "..."}</span>
+              <span className="infoDescription">Mo/s</span>
             </p>
           </div>
         </div>

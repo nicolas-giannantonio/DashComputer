@@ -4,6 +4,7 @@ function Monitoring() {
   const [monitor, SetMonitor] = useState("");
   const [temp, setTemp] = useState("");
   const [play, setPlay] = useState(false);
+  const [speedTest, setSpeedTest] = useState(0);
   /* console.log(play); */
 
   /* useEffect(() => {
@@ -20,6 +21,12 @@ function Monitoring() {
     let res = api.req_monitor();
     res.then((r) => SetMonitor(r)).catch((e) => console.log(e));
   }
+
+  useEffect(() => {
+    let res = api.req_speedTest();
+    res.then((r) => setSpeedTest(r)).catch((e) => console.log(e));
+  }, [speedTest]);
+  console.log(speedTest);
 
   /* useEffect(() => {
     let res = api.req_inetChecksite();
@@ -139,20 +146,14 @@ function Monitoring() {
         </p> */}
       </div>
 
-      <p className="title-container">Monitoring (live network)</p>
+      <p className="title-container">SpeedTest </p>
 
       <div className="container-row">
         <p className="under-up">
           <span className="important-data">
-            {temp.url == undefined ? "..." : temp.url}
+            {speedTest == 0 ? "..." : speedTest.toFixed(2)}
           </span>
-          <span className="subtitle-data">(site)</span>
-        </p>
-        <p className="under-up">
-          <span className="important-data">
-            {temp.ms == undefined ? "..." : Math.floor(temp.ms) + "ms"}
-          </span>
-          <span className="subtitle-data">(temps de réponse)</span>
+          <span className="subtitle-data">(Mb/s)</span>
         </p>
       </div>
     </div>

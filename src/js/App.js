@@ -16,6 +16,7 @@ import { Route, Routes } from "react-router-dom";
 import Network from "../pages/Network";
 import Wifi from "../pages/Wifi";
 import Home from "../pages/Home";
+import Params from "../pages/Params";
 
 
 function App() {
@@ -89,6 +90,17 @@ function App() {
               <hr className="line-separation" />
               <Navigation />
               <Wifi />
+            </>
+          }
+        />
+        <Route
+          path="/params"
+          element={
+            <>
+              <p className="title-name">Paramètres</p>
+              <hr className="line-separation" />
+              <Navigation />
+              <Params />
             </>
           }
         />
