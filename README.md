@@ -24,9 +24,15 @@ The software is developed for macOS, but also compatible for window/linux with l
 ### *This project is open source, anyone wishing to contribute to the project is invited.*
 
 ### Installation 
-- download the folder 
-- npm install
-- npm start
+Download [Node.js](https://nodejs.org/en/download/).
+Run this followed commands:
+``` bash
+# Installer les dependances du projet seulement la premiere fois
+npm install
+
+# Lance le serveur de developpement sur localhost:8080
+npm start
+```
 
 ## Network
 <img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/213694119-03ec8916-e8da-4d5a-875f-3d628e483bc5.png">
