@@ -30,7 +30,7 @@ Run this followed commands:
 # Installer les dependances du projet seulement la premiere fois
 npm install
 
-# Lance le serveur de developpement sur localhost:8080
+# Lance le logiciel
 npm start
 ```
 
