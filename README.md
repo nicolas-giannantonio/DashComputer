@@ -23,10 +23,10 @@ The software is developed for macOS, but also compatible for window/linux with l
 Download [Node.js](https://nodejs.org/en/download/).
 Run this followed commands:
 ``` bash
-# Installer les dependances du projet seulement la premiere fois
+# Install dependencies (only the first time)
 npm install
 
-# Lance le logiciel
+# Lunch the software
 npm start
 ```
 
