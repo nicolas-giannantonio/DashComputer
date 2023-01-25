@@ -12,8 +12,8 @@ function Params() {
       <div className="form-token-params">
         <p>
           Aller sur le site <a href="https://fast.com/">fast.com</a> Ouvrez les
-          outils de développement de votre navigateur, allez dans l'onglet
-          Réseau et copiez le token sur l'URL de la requête qui ressemble à
+          outils de développement de votre navigateur, allez dans l'onglet 
+          <b> Réseau</b> et copiez le token sur l'URL de la requête qui ressemble à
           <br />
           <b>
             https://api.fast.com/netflix/speedtest?https=true&token=

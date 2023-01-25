@@ -7,6 +7,7 @@ const Request = require("tedious").Request;
 const { exec } = require("child_process");
 
 const FastSpeedtest = require("fast-speedtest-api");
+const { get } = require("http");
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -248,48 +249,87 @@ ipcMain.handle("req_wifi", () => {
 });
 
 /* PARAMS */
-let token = "";
+let token;
+async function readFile() {
+  try {
+    let data = await fs.promises.readFile("./src/data.json", "utf8");
+    let jsonData = JSON.parse(data);
+    return (token = jsonData["token"]);
+  } catch (err) {
+    throw err;
+  }
+}
+
+ipcMain.handle("req_speedTest", async () => {
+
+  await readFile().then((data) => {
+    token = data;
+  });
+
+  let speedtest = new FastSpeedtest({
+    token: token, // required
+    verbose: false, // default: false
+    timeout: 5000, // default: 5000
+    https: true, // default: true
+    urlCount: 5, // default: 5
+    bufferSize: 8, // default: 8
+    unit: FastSpeedtest.UNITS.Mbps, // default: Bps
+  });
+  return new Promise((resolve, reject) => {
+    speedtest
+      .getSpeed()
+      .then((s) => {
+        console.log(`Speed: ${s} Mbps`);
+        resolve(s);
+      })
+      .catch((e) => {
+        reject(e.message);
+      });
+  });
+});
+
 ipcMain.on("3000", (event, arg) => {
   console.log("evnet, arg : ", event, arg);
   const notification = {
     title: arg,
     body: "Votre token à bien été enregistré !",
   };
-  token = arg;
-  new Notification(notification).show();
 
-  if (token.length > 0) {
-    let speedtest = new FastSpeedtest({
-      token: token, // required
-      verbose: false, // default: false
-      timeout: 5000, // default: 5000
-      https: true, // default: true
-      urlCount: 5, // default: 5
-      bufferSize: 8, // default: 8
-      unit: FastSpeedtest.UNITS.Mbps, // default: Bps
-    });
+  let jsonDataString = JSON.stringify({ token: arg });
+  fs.writeFile("./src/data.json", jsonDataString, "utf8", (err) => {
+    if (err) {
+      new Notification({
+        title: "Erreur",
+        body: "Impossible d'enregistrer votre token",
+      }).show();
+      throw err;
+    }
+    console.log("Le fichier a été sauvegardé!");
+    new Notification(notification).show();
+  });
 
-    ipcMain.handle("req_speedTest", () => {
-      return new Promise((resolve, reject) => {
-        speedtest
-          .getSpeed()
-          .then((s) => {
-            console.log(`Speed: ${s} Mbps`);
-            resolve(s);
-          })
-          .catch((e) => {
-            reject(e.message);
-          });
-      });
+  let speedtest = new FastSpeedtest({
+    token: arg, // required
+    verbose: false, // default: false
+    timeout: 5000, // default: 5000
+    https: true, // default: true
+    urlCount: 5, // default: 5
+    bufferSize: 8, // default: 8
+    unit: FastSpeedtest.UNITS.Mbps, // default: Bps
+  });
+  ipcMain.handle("req_speedTest", () => {
+    return new Promise((resolve, reject) => {
+      speedtest
+        .getSpeed()
+        .then((s) => {
+          console.log(`Speed: ${s} Mbps`);
+          resolve(s);
+        })
+        .catch((e) => {
+          reject(e.message);
+        });
     });
-  } else {
-    ipcMain.handle("req_speedTest", () => {
-      return new Promise((resolve, reject) => {
-        resolve(0);
-        reject("error");
-      });
-    });
-  }
+  });
 });
 
 /* let token = "YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm";
