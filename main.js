@@ -261,7 +261,6 @@ async function readFile() {
 }
 
 ipcMain.handle("req_speedTest", async () => {
-
   await readFile().then((data) => {
     token = data;
   });
@@ -308,28 +307,6 @@ ipcMain.on("3000", (event, arg) => {
     new Notification(notification).show();
   });
 
-  let speedtest = new FastSpeedtest({
-    token: arg, // required
-    verbose: false, // default: false
-    timeout: 5000, // default: 5000
-    https: true, // default: true
-    urlCount: 5, // default: 5
-    bufferSize: 8, // default: 8
-    unit: FastSpeedtest.UNITS.Mbps, // default: Bps
-  });
-  ipcMain.handle("req_speedTest", () => {
-    return new Promise((resolve, reject) => {
-      speedtest
-        .getSpeed()
-        .then((s) => {
-          console.log(`Speed: ${s} Mbps`);
-          resolve(s);
-        })
-        .catch((e) => {
-          reject(e.message);
-        });
-    });
-  });
 });
 
 /* let token = "YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm";
