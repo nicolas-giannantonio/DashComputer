@@ -21,8 +21,10 @@ const createWindow = () => {
     },
     autoHideMenuBar: false,
   });
+
   win.loadFile("./public/index.html").then((r) => console.log(r));
 };
+
 
 require("electron-reload")(__dirname, {
   electron: path.join(__dirname, "node_modules", ".bin", "electron"),
@@ -306,7 +308,6 @@ ipcMain.on("3000", (event, arg) => {
     console.log("Le fichier a été sauvegardé!");
     new Notification(notification).show();
   });
-
 });
 
 /* let token = "YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm";
