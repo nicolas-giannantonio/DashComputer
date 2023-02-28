@@ -33,5 +33,4 @@ npm start
 ```
 
 ### Home
-
-<img width="1512" alt="image" src="https://user-images.githubusercontent.com/75692173/214318513-4b5af0cd-5459-4f71-8702-d31190b53196.png">
+![dashcomputer](https://user-images.githubusercontent.com/75692173/221917574-c0c4c0e7-6db5-4259-b04d-81d946dc7b1b.jpg)
