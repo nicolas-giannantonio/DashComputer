@@ -29,7 +29,7 @@ Run this followed commands:
 # Install dependencies (only the first time)
 npm install
 
-# Lunch the software
+# Launch the software
 npm start
 ```
 
