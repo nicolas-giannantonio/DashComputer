@@ -1,7 +1,5 @@
 # DashComputer
 
-## Hello everyone,
-
 This software allows you to do different hardware/software analyses, you will find different tools:
 
 - Live analysis of your CPU (_still in development_)
