@@ -15,7 +15,6 @@ This software allows you to do different hardware/software analyses, you will fi
 The software is developed for macOS, but also compatible for window/linux with less features.
 (It is still in the development phase, many changes are coming 🔜)
 
-### created by Nicolas GIANNANTONIO
 ### _This project is open source, anyone wishing to contribute to the project is invited._
 
 ## Installation
