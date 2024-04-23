@@ -27,6 +27,3 @@ npm install
 # Launch the software
 npm start
 ```
-
-### Home
-![dashcomputer](https://user-images.githubusercontent.com/75692173/221917574-c0c4c0e7-6db5-4259-b04d-81d946dc7b1b.jpg)
